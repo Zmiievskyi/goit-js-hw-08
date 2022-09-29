@@ -523,7 +523,6 @@ const lightbox = new (0, _simplelightboxDefault.default)(".gallery a", {
     captionDelay: 250,
     captionData: "alt"
 });
-console.dir(lightbox);
 
 },{"simplelightbox":"9ydBq","./gallery-items":"9C7dK","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","simplelightbox/dist/simple-lightbox.min.css":"kaxSc"}],"9ydBq":[function(require,module,exports) {
 /*!

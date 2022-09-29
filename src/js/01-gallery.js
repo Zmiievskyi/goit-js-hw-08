@@ -25,6 +25,3 @@ const lightbox = new SimpleLightbox('.gallery a', {
   captionDelay: 250,
   captionData: 'alt',
 });
-
-
-console.dir(lightbox);
