@@ -522,7 +522,7 @@ player.setCurrentTime(localStorage.getItem("videoplayer-current-time")).then(fun
     error.name;
 });
 
-},{"@vimeo/player":"kmmUG","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","lodash":"3qBDj"}],"kmmUG":[function(require,module,exports) {
+},{"@vimeo/player":"kmmUG","lodash":"3qBDj","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"kmmUG":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var global = arguments[3];

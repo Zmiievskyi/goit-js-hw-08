@@ -524,7 +524,7 @@ const lightbox = new (0, _simplelightboxDefault.default)(".gallery a", {
     captionData: "alt"
 });
 
-},{"simplelightbox":"9ydBq","./gallery-items":"9C7dK","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","simplelightbox/dist/simple-lightbox.min.css":"kaxSc"}],"9ydBq":[function(require,module,exports) {
+},{"simplelightbox":"9ydBq","simplelightbox/dist/simple-lightbox.min.css":"kaxSc","./gallery-items":"9C7dK","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"9ydBq":[function(require,module,exports) {
 /*!
 	By André Rinas, www.andrerinas.de
 	Documentation, www.simplelightbox.de
@@ -1939,7 +1939,7 @@ var _default = SimpleLightbox;
 exports["default"] = _default;
 global.SimpleLightbox = SimpleLightbox;
 
-},{}],"9C7dK":[function(require,module,exports) {
+},{}],"kaxSc":[function() {},{}],"9C7dK":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "galleryItems", ()=>galleryItems);
@@ -2021,6 +2021,6 @@ exports.export = function(dest, destName, get) {
     });
 };
 
-},{}],"kaxSc":[function() {},{}]},["8EXaa","6XVkV"], "6XVkV", "parcelRequired7c6")
+},{}]},["8EXaa","6XVkV"], "6XVkV", "parcelRequired7c6")
 
 //# sourceMappingURL=01-gallery.53390864.js.map
