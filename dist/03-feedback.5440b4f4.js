@@ -513,19 +513,25 @@ const refs = {
     input: document.querySelector("input"),
     form: document.querySelector("form")
 };
+console.log("ss");
 refs.form.addEventListener("input", (0, _lodashDefault.default).throttle(onInput, 500));
 refs.form.addEventListener("submit", onFormSubmit);
 try {
-    const localStorageInput = JSON.parse((0, _storage.load)("feedback-form-state"));
-    if (localStorageInput.email) refs.input.value = localStorageInput.email;
-    else refs.input.value = "";
-    if (localStorageInput.message) refs.message.value = localStorageInput.message;
-    else refs.message.value = "";
+    const localStorageInput = (0, _storage.load)("feedback-form-state");
+    if (localStorageInput) {
+        const storage = JSON.parse(localStorageInput);
+        if (storage.email) refs.input.value = storage.email;
+        else refs.input.value = "";
+        if (storage.message) refs.message.value = storage.message;
+        else refs.message.value = "";
+    }
 } catch (error) {}
 function onInput(event) {
     event.preventDefault();
-    if (event.target.nodeName === "INPUT") obj.email = event.target.value;
-    if (event.target.nodeName === "TEXTAREA") obj.message = event.target.value;
+    if (event.currentTarget) {
+        obj.email = event.currentTarget[0].value;
+        obj.message = event.currentTarget[1].value;
+    }
     (0, _storage.save)("feedback-form-state", JSON.stringify(obj));
 }
 function onFormSubmit(evt) {
@@ -537,11 +543,65 @@ function onFormSubmit(evt) {
         obj.message = formElements.message.value;
         console.log(obj);
         localStorage.clear();
+        refs.input.value = "";
+        refs.message.value = "";
     }
     return obj;
 }
 
-},{"lodash":"3qBDj","./storage":"h0qAZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"3qBDj":[function(require,module,exports) {
+},{"./storage":"h0qAZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","lodash":"3qBDj"}],"h0qAZ":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "save", ()=>save);
+parcelHelpers.export(exports, "load", ()=>load);
+const save = (key, value)=>{
+    try {
+        const serializedState = JSON.stringify(value);
+        localStorage.setItem(key, serializedState);
+    } catch (error) {
+        console.error("Set state error: ", error.message);
+    }
+};
+const load = (key)=>{
+    try {
+        const serializedState = localStorage.getItem(key);
+        return serializedState === null ? undefined : JSON.parse(serializedState);
+    } catch (error) {
+        console.error("Get state error: ", error.message);
+    }
+};
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gkKU3":[function(require,module,exports) {
+exports.interopDefault = function(a) {
+    return a && a.__esModule ? a : {
+        default: a
+    };
+};
+exports.defineInteropFlag = function(a) {
+    Object.defineProperty(a, "__esModule", {
+        value: true
+    });
+};
+exports.exportAll = function(source, dest) {
+    Object.keys(source).forEach(function(key) {
+        if (key === "default" || key === "__esModule" || dest.hasOwnProperty(key)) return;
+        Object.defineProperty(dest, key, {
+            enumerable: true,
+            get: function() {
+                return source[key];
+            }
+        });
+    });
+    return dest;
+};
+exports.export = function(dest, destName, get) {
+    Object.defineProperty(dest, destName, {
+        enumerable: true,
+        get: get
+    });
+};
+
+},{}],"3qBDj":[function(require,module,exports) {
 var global = arguments[3];
 (function() {
     /** Used as a safe reference for `undefined` in pre-ES5 environments. */ var undefined;
@@ -14770,58 +14830,6 @@ var global = arguments[3];
     } else // Export to the global object.
     root._ = _;
 }).call(this);
-
-},{}],"h0qAZ":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "save", ()=>save);
-parcelHelpers.export(exports, "load", ()=>load);
-const save = (key, value)=>{
-    try {
-        const serializedState = JSON.stringify(value);
-        localStorage.setItem(key, serializedState);
-    } catch (error) {
-        console.error("Set state error: ", error.message);
-    }
-};
-const load = (key)=>{
-    try {
-        const serializedState = localStorage.getItem(key);
-        return serializedState === null ? undefined : JSON.parse(serializedState);
-    } catch (error) {
-        console.error("Get state error: ", error.message);
-    }
-};
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gkKU3":[function(require,module,exports) {
-exports.interopDefault = function(a) {
-    return a && a.__esModule ? a : {
-        default: a
-    };
-};
-exports.defineInteropFlag = function(a) {
-    Object.defineProperty(a, "__esModule", {
-        value: true
-    });
-};
-exports.exportAll = function(source, dest) {
-    Object.keys(source).forEach(function(key) {
-        if (key === "default" || key === "__esModule" || dest.hasOwnProperty(key)) return;
-        Object.defineProperty(dest, key, {
-            enumerable: true,
-            get: function() {
-                return source[key];
-            }
-        });
-    });
-    return dest;
-};
-exports.export = function(dest, destName, get) {
-    Object.defineProperty(dest, destName, {
-        enumerable: true,
-        get: get
-    });
-};
 
 },{}]},["7Ih8d","eH52W"], "eH52W", "parcelRequired7c6")
 

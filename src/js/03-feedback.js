@@ -7,31 +7,31 @@ const refs = {
   input: document.querySelector('input'),
   form: document.querySelector('form'),
 };
-
+console.log('ss');
 refs.form.addEventListener('input', _.throttle(onInput, 500));
 refs.form.addEventListener('submit', onFormSubmit);
-
 try {
-  const localStorageInput = JSON.parse(load('feedback-form-state'));
-  if (localStorageInput.email) {
-    refs.input.value = localStorageInput.email;
-  } else {
-    refs.input.value = '';
-  }
-  if (localStorageInput.message) {
-    refs.message.value = localStorageInput.message;
-  } else {
-    refs.message.value = '';
+  const localStorageInput = load('feedback-form-state');
+  if (localStorageInput) {
+    const storage = JSON.parse(localStorageInput);
+    if (storage.email) {
+      refs.input.value = storage.email;
+    } else {
+      refs.input.value = '';
+    }
+    if (storage.message) {
+      refs.message.value = storage.message;
+    } else {
+      refs.message.value = '';
+    }
   }
 } catch (error) {}
 
 function onInput(event) {
   event.preventDefault();
-  if (event.target.nodeName === 'INPUT') {
-    obj.email = event.target.value;
-  }
-  if (event.target.nodeName === 'TEXTAREA') {
-    obj.message = event.target.value;
+  if (event.currentTarget) {
+    obj.email = event.currentTarget[0].value;
+    obj.message = event.currentTarget[1].value;
   }
   save('feedback-form-state', JSON.stringify(obj));
 }
@@ -47,8 +47,8 @@ function onFormSubmit(evt) {
     obj.message = formElements.message.value;
     console.log(obj);
     localStorage.clear();
+    refs.input.value = '';
+    refs.message.value = '';
   }
   return obj;
 }
-
-
